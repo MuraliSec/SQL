@@ -1,0 +1,146 @@
+
+-- Create the database
+CREATE DATABASE ekart;
+
+-- Use the newly created database
+USE ekart;
+
+-- Create the Category table (no AUTO_INCREMENT)
+CREATE TABLE category (
+    category_id INT PRIMARY KEY,
+    category_name VARCHAR(100) NOT NULL
+);
+
+-- Insert categories with RANDOM IDs (1–10 shuffled)
+INSERT INTO category (category_id, category_name) VALUES
+(4, 'Electronics'),
+(9, 'Clothing'),
+(2, 'Books'),
+(7, 'Home Appliances'),
+(10, 'Toys'),
+(5, 'Groceries'),
+(1, 'Sports'),
+(8, 'Beauty'),
+(6, 'Automotive'),
+(3, 'Stationery');
+
+-- Create the Products table (no AUTO_INCREMENT)
+CREATE TABLE products (
+    product_id INT PRIMARY KEY,
+    product_name VARCHAR(150) NOT NULL,
+    quantity INT NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    product_company_name VARCHAR(100),
+    category_id INT,
+    discount VARCHAR(255),
+    FOREIGN KEY (category_id) REFERENCES category(category_id)
+);
+
+-- Insert products using the new randomized category_ids
+INSERT INTO products (product_id, product_name, quantity, price, product_company_name, category_id, discount) VALUES
+(4, 'Smartphone X100', 50, 699.99, 'TechCorp', 4, '5%'),        -- Electronics
+(9, 'T-shirt Cotton', 200, 19.99, 'WearWell', 9, '7%'),         -- Clothing
+(2, 'Fiction Novel', 150, 9.99, 'ReadMore', 2, '3%'),           -- Books
+(6, 'Blender Pro', 30, 89.99, 'KitchenEase', 7, '5%'),          -- Home Appliances
+(1, 'Toy Train', 100, 14.99, 'PlayZone', 10, '1%'),             -- Toys
+(7, 'Organic Rice 5kg', 80, 12.50, 'GreenHarvest', 5, '2%'),    -- Groceries
+(10, 'Football Size 5', 60, 24.99, 'SportsMax', 1, '4%'),       -- Sports
+(8, 'Face Cream 50ml', 120, 15.49, 'GlowUp', 8, '6%'),          -- Beauty
+(3, 'Car Shampoo', 90, 7.99, 'AutoShine', 6, '1%'),             -- Automotive
+(5, 'Notebook A5', 300, 2.99, 'WriteSmart', 3, '3%');           -- Stationery
+
+-- Create the Customers table (no AUTO_INCREMENT)
+CREATE TABLE customers (
+    customer_id INT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    phone_number VARCHAR(15),
+    state VARCHAR(100),
+    membership_status BOOLEAN DEFAULT FALSE
+);
+
+-- Insert customers with RANDOM IDs
+INSERT INTO customers (customer_id, name, email, phone_number, state, membership_status) VALUES
+(10, 'John Doe', 'john@example.com', '1234567890', 'California', TRUE),
+(3, 'Alice Smith', 'alice@example.com', '2345678901', 'Texas', FALSE),
+(6, 'Bob Johnson', 'bob@example.com', '3456789012', 'New York', TRUE),
+(1, 'Eve Carter', 'eve@example.com', '4567890123', 'Florida', FALSE),
+(7, 'Charlie Brown', 'charlie@example.com', '5678901234', 'Illinois', TRUE),
+(4, 'Grace Lee', 'grace@example.com', '6789012345', 'Washington', TRUE),
+(9, 'David Kim', 'david@example.com', '7890123456', 'Nevada', FALSE),
+(2, 'Sophia Wang', 'sophia@example.com', '8901234567', 'Oregon', FALSE),
+(8, 'Lucas Zhang', 'lucas@example.com', '9012345678', 'Arizona', TRUE),
+(5, 'Mia Patel', 'mia@example.com', '1122334455', 'Colorado', FALSE);
+
+-- Step 1: Create the Orders table (NO AUTO_INCREMENT), without delivery_status column
+CREATE TABLE orders (
+    order_id INT PRIMARY KEY,
+    customer_id INT,
+    product_id INT,
+    quantity_ordered INT NOT NULL,
+    order_amount DECIMAL(10,2) NOT NULL,
+    payment_mode VARCHAR(50),
+    order_date DATE,
+    is_packed BOOLEAN DEFAULT FALSE,
+    delivered BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (customer_id) REFERENCES customers(customer_id),
+    FOREIGN KEY (product_id) REFERENCES products(product_id)
+);
+
+-- Step 2: Insert 30 sample order records
+INSERT INTO orders (
+    order_id, customer_id, product_id, quantity_ordered, order_amount,
+    payment_mode, order_date, is_packed, delivered
+) VALUES
+(1, 1, 4, 1, 699.99, 'Credit Card', '2025-07-01', FALSE, TRUE),
+(2, 3, 9, 2, 39.98, 'Cash on Delivery', '2025-07-02', FALSE, FALSE),
+(3, 6, 2, 3, 29.97, 'UPI', '2025-07-03', TRUE, TRUE),
+(4, 10, 6, 1, 89.99, 'Net Banking', '2025-07-04', FALSE, FALSE),
+(5, 7, 1, 2, 29.98, 'Credit Card', '2025-07-05', TRUE, TRUE),
+(6, 4, 7, 1, 12.50, 'Debit Card', '2025-07-06', FALSE, FALSE),
+(7, 9, 10, 2, 49.98, 'Credit Card', '2025-07-07', TRUE, TRUE),
+(8, 2, 8, 1, 15.49, 'UPI', '2025-07-08', FALSE, FALSE),
+(9, 8, 3, 3, 23.97, 'Cash on Delivery', '2025-07-09', TRUE, TRUE),
+(10, 5, 5, 5, 14.95, 'Net Banking', '2025-07-10', FALSE, FALSE),
+(11, 6, 1, 1, 14.99, 'Credit Card', '2025-07-11', TRUE, TRUE),
+(12, 7, 3, 2, 15.98, 'UPI', '2025-07-12', FALSE, FALSE),
+(13, 2, 6, 1, 89.99, 'Net Banking', '2025-07-13', TRUE, TRUE),
+(14, 3, 10, 1, 24.99, 'Cash on Delivery', '2025-07-14', TRUE, TRUE),
+(15, 5, 2, 4, 39.96, 'Debit Card', '2025-07-15', FALSE, FALSE),
+(16, 9, 7, 2, 25.00, 'UPI', '2025-07-16', TRUE, TRUE),
+(17, 10, 5, 3, 37.50, 'Credit Card', '2025-07-17', FALSE, FALSE),
+(18, 1, 8, 2, 30.98, 'Net Banking', '2025-07-18', TRUE, TRUE),
+(19, 8, 4, 1, 699.99, 'UPI', '2025-07-19', TRUE, TRUE),
+(20, 6, 9, 5, 99.95, 'Cash on Delivery', '2025-07-20', FALSE, FALSE),
+(21, 4, 3, 2, 15.98, 'Credit Card', '2025-07-21', TRUE, TRUE),
+(22, 2, 1, 1, 14.99, 'Debit Card', '2025-07-22', FALSE, FALSE),
+(23, 7, 8, 3, 46.47, 'UPI', '2025-07-23', TRUE, TRUE),
+(24, 3, 7, 1, 12.50, 'Net Banking', '2025-07-24', FALSE, FALSE),
+(25, 10, 6, 2, 179.98, 'Credit Card', '2025-07-25', TRUE, TRUE),
+(26, 1, 10, 2, 49.98, 'Cash on Delivery', '2025-07-26', FALSE, FALSE),
+(27, 5, 2, 1, 9.99, 'UPI', '2025-07-27', TRUE, TRUE),
+(28, 9, 4, 1, 699.99, 'Credit Card', '2025-07-28', FALSE, FALSE),
+(29, 8, 5, 4, 50.00, 'Net Banking', '2025-07-29', TRUE, TRUE),
+(30, 6, 9, 3, 59.97, 'UPI', '2025-07-30', TRUE, TRUE);
+
+-- Step 3: Query orders with readable status for packing and delivery
+SELECT 
+    order_id,
+    customer_id,
+    product_id,
+    quantity_ordered,
+    order_amount,
+    payment_mode,
+    order_date,
+    
+    CASE 
+        WHEN is_packed THEN 'Shipped'
+        ELSE 'Not Shipped'
+    END AS shipping_status,
+
+    CASE 
+        WHEN delivered THEN 'Delivered'
+        ELSE 'Not Delivered'
+   END AS delivery_status
+
+FROM orders;
