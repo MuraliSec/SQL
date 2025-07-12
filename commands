@@ -1,0 +1,87 @@
+/* login: mysql -u root p
+//enter password in the next line */
+– another way to define as commnet
+
+creates a new database                                                           
+ ->  CREATE DATABASE exampledb;
+
+show all databases                                                                  
+ ->  SHOW DATABASES;
+
+select database for operations like altering,create tables        
+->  USE exampledb;
+Without this command you can’t access table
+
+creates a new table                                                                 
+ ->  CREATE TABLE exampletb;
+
+view all the tables                                                                     
+ ->  SHOW TABLES;
+
+inserts new data into a database                                           
+ ->  INSERT INTO exampletb(column1,2,3,4,5)
+values(‘);
+
+extract data from a database                                                   
+ ->  SELECT exampledb;
+
+Query to view the table data                                                    
+ ->SELECT * FROM exampletb;
+
+Query to view specific columns in the table data                          
+ ->SELECT column, column2, column3 FROM cricketers;
+
+ primarykey Column
+Primary_id int primary key auto_increment,
+
+
+
+ALTER
+
+Add a New Column
+->ALTER TABLE table_name
+ADD COLUMN column_name column_definition;
+
+Add primary_key Column
+->ALTER TABLE table_name
+ADD CONSTRAINT pk_name PRIMARY KEY (column_name);
+
+Delete column
+->ALTER TABLE table_name
+DROP COLUMN column_name;
+
+Modify Column Definition (for datatype or rename column name)
+->ALTER TABLE table_name
+MODIFY COLUMN column_name new_definition;
+
+Rename Column
+->ALTER TABLE table_name
+CHANGE COLUMN old_name new_name new_definition;
+
+Remove Column From Table
+->ALTER TABLE table_name
+DROP COLUMN column_name;
+
+
+Delete row
+->DELETE FROM table_name
+WHERE primary_key_column = value;
+
+Add column from another table
+->UPDATE table2
+JOIN table1 ON table2.foreign_key = table 1.foreign_key
+SET table2.column2 = table1.column2;
+
+
+
+
+
+
+
+Update table cell data
+-> update exampletb set examplecolumn = inputvalue where  primarykey=1234 ;
+
+Update table multiple cell data
+->UPDATE exampletb 
+SET examplecolumn3 = 70 
+WHERE examplecolumn1 = 1234 AND  examplecolumn2= 5678;
