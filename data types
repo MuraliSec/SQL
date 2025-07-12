@@ -1,0 +1,97 @@
+BOOL
+Zero is considered as false, nonzero values are considered as true.
+
+BOOLEAN
+Equal to BOOL.
+
+SMALLINT(size)
+A small integer. Signed values range from -32,768 to 32,767. Unsigned values range from 0 to 65,535. The size parameter specifies the maximum display width (up to 255).
+
+MEDIUMINT(size)
+A medium integer. Signed values range from -8,388,608 to 8,388,607. Unsigned values range from 0 to 16,777,215. The size parameter specifies the maximum display width (up to 255).
+
+INT(size)
+A standard integer. Signed values range from -2,147,483,648 to 2,147,483,647. Unsigned values range from 0 to 4,294,967,295. The size parameter specifies the maximum display width (up to 255).
+
+INTEGER(size)
+Equal to INT(size).
+
+BIGINT(size)
+A large integer. Signed values range from -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807. Unsigned values range from 0 to 18,446,744,073,709,551,615. The size parameter specifies the maximum display width (up to 255).
+
+FLOAT(size, d)
+A floating point number. The total number of digits is specified by size. The number of digits after the decimal point is specified by d. This syntax is deprecated since MySQL 8.0.17 and will be removed in future versions.
+
+FLOAT(p)
+A floating point number. MySQL uses p to decide whether to use FLOAT or DOUBLE. If p is 0 to 24, data type becomes FLOAT. If p is 25 to 53, data type becomes DOUBLE.
+
+DOUBLE(size, d)
+A floating point number with normal size. The total number of digits is specified by size, and digits after the decimal point by d.
+
+DOUBLE PRECISION(size, d)
+Same as DOUBLE(size, d).
+
+DECIMAL(size, d)
+An exact fixed-point number. The total number of digits is size, digits after decimal point is d. Maximum size is 65, maximum d is 30. Default size is 10, default d is 0.
+
+DEC(size, d)
+Equal to DECIMAL(size, d).
+
+Note: All numeric types can have options UNSIGNED or ZEROFILL. UNSIGNED disallows negative numbers. ZEROFILL pads numbers with leading zeros and automatically adds UNSIGNED.
+
+Date and Time Data Types
+
+DATE
+Stores only date. Format: YYYY-MM-DD. Supported range is from '1000-01-01' to '9999-12-31'.
+
+DATETIME(fsp)
+Stores date and time. Format: YYYY-MM-DD hh:mm:ss. Range from '1000-01-01 00:00:00' to '9999-12-31 23:59:59'. Can use DEFAULT and ON UPDATE to automatically set current date and time.
+
+TIMESTAMP(fsp)
+Stores timestamp as seconds since Unix epoch (1970-01-01 00:00:00 UTC). Format: YYYY-MM-DD hh:mm:ss. Range from '1970-01-01 00:00:01' UTC to '2038-01-09 03:14:07' UTC. Supports automatic current timestamp on insert or update.
+
+TIME(fsp)
+Stores only time. Format: hh:mm:ss. Range from '-838:59:59' to '838:59:59'.
+
+YEAR
+Stores year in four-digit format. Values from 1901 to 2155 and 0000 allowed. MySQL 8.0 does not support two-digit years.
+
+Character and Text Types
+
+CHAR(n)
+Fixed length string, up to 255 characters.
+
+VARCHAR(n)
+Variable length string, up to 65,535 bytes. Supports alphanumeric.
+
+TEXT
+Text data up to 65,535 bytes (~64 KB). Supports alphanumeric.
+
+TINYTEXT
+Text data up to 255 bytes. Supports alphanumeric.
+
+MEDIUMTEXT
+Text data up to 16,777,215 bytes (~16 MB). Supports alphanumeric.
+
+LONGTEXT
+Text data up to 4,294,967,295 bytes (~4 GB). Supports alphanumeric.
+
+Summary of Date/Time and Boolean Types
+
+DATE
+Stores only date YYYY-MM-DD.
+
+TIME
+Stores only time HH:MM:SS.
+
+DATETIME
+Stores both date and time.
+
+TIMESTAMP
+Stores YYYY-MM-DD HH:MM:SS.
+
+YEAR
+Stores year in yyyy format.
+
+BOOLEAN
+Stores TRUE or FALSE.
